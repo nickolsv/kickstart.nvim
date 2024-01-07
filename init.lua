@@ -193,7 +193,15 @@ require('lazy').setup({
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
-    config = function()
+    opts = {
+      style = 'darker',
+      highlights = {
+        ['CursorLineNr'] = {fg = '#fff'},
+      },
+      transparent = false
+    },
+    config = function(_, opts)
+      require("onedark").setup(opts)
       vim.cmd.colorscheme 'onedark'
     end,
   },
@@ -204,10 +212,10 @@ require('lazy').setup({
     -- See `:help lualine.txt`
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = 'onedark',
-        component_separators = '|',
-        section_separators = '',
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''}
       },
     },
   },
@@ -222,7 +230,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim', opts = {}, lazy = false },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -275,11 +283,13 @@ require('lazy').setup({
 --
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
 vim.wo.relativenumber = true
+vim.opt.cursorline = true
+-- vim.opt.cursorlineopt="number"
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -317,6 +327,7 @@ vim.o.termguicolors = true
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set('n', 'x', "\"_x", { silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -327,6 +338,8 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -338,6 +351,67 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+-- [[ Hide/Show tmux bar ]]
+local tmux_group = vim.api.nvim_create_augroup('TmuxStatus', { clear = true })
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    vim.fn.system {
+      'tmux',
+      'set',
+      'status',
+      'off'
+    }
+  end,
+  group = tmux_group,
+  pattern = '*',
+})
+
+vim.api.nvim_create_autocmd('VimLeave', {
+  callback = function()
+    vim.fn.system {
+      'tmux',
+      'set',
+      'status',
+      'on'
+    }
+  end,
+  group = tmux_group,
+  pattern = '*',
+})
+
+vim.api.nvim_create_autocmd('VimResume', {
+  callback = function()
+    vim.fn.system {
+      'tmux',
+      'set',
+      'status',
+      'off'
+    }
+  end,
+  group = tmux_group,
+  pattern = '*',
+})
+
+vim.api.nvim_create_autocmd('VimSuspend', {
+  callback = function()
+    vim.fn.system {
+      'tmux',
+      'set',
+      'status',
+      'on'
+    }
+  end,
+  group = tmux_group,
+  pattern = '*',
+})
+
+-- Treat JSON files as JSONc (allow comments)
+vim.api.nvim_command([[
+  augroup JsonFileType
+    autocmd FileType json set filetype=jsonc
+  augroup END
+]])
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
@@ -526,6 +600,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
+
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
