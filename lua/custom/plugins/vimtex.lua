@@ -3,6 +3,6 @@ return {
   version = "*",
   dependencies = {
   },
-  config = function ()
+  config = function()
   end,
 }

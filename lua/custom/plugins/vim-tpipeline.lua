@@ -4,6 +4,6 @@ return {
   dependencies = {
   },
   enabled = false,
-  config = function ()
+  config = function()
   end,
 }
