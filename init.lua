@@ -5,7 +5,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set theme (applies to theme and lualine sections)
-Theme = 'onedark'
+Theme = 'catppuccin'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 require 'lazy-nvim'
