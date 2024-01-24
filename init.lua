@@ -5,7 +5,11 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set theme (applies to theme and lualine sections)
-Theme = 'catppuccin'
+if os.getenv("TERM") ~= "linux" then
+  Theme = 'catppuccin'
+else
+  Theme = 'auto'
+end
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 require 'lazy-nvim'
