@@ -16,6 +16,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 vim.keymap.set('n', '<leader>=', vim.lsp.buf.format, { desc = 'Format current buffer with LSP' })
+vim.keymap.set('n', '<leader>r', ':%s/<C-r><C-w>/', { desc = 'Global Replace Word' })
 vim.keymap.set('n', '<Esc><Esc>', vim.cmd.noh, { desc = 'Clear search highlights' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
@@ -62,7 +63,6 @@ LSP_on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
   nmap('<leader>cr', vim.lsp.buf.rename, '[C]ode [R]ename')
 
