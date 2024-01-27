@@ -49,7 +49,9 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 
 -- Buffer keymaps
 vim.keymap.set('n', '<leader>bk', vim.cmd.bp, { desc = 'Go to previous buffer' })
+vim.keymap.set('n', '<Tab>', vim.cmd.bp, { desc = 'Go to previous buffer' })
 vim.keymap.set('n', '<leader>bj', vim.cmd.bn, { desc = 'Go to next buffer' })
+vim.keymap.set('n', '<S-Tab>', vim.cmd.bn, { desc = 'Go to next buffer' })
 vim.keymap.set('n', '<leader>bd', vim.cmd.bd, { desc = 'Remove current buffer' })
 
 --  This function gets run when an LSP connects to a particular buffer.
