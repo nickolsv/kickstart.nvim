@@ -3,6 +3,7 @@
 
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'x', "\"_x", { silent = true })
+-- vim.keymap.set('n', '[[', '<Plug>MatchItNormalMultiBackward', { desc = 'Previous unmatched group' })
 -- vim.keymap.set('n', 'R', "r", { silent = true })
 -- vim.keymap.set('n', 'r', "\"_d", { silent = true })
 
@@ -46,6 +47,10 @@ vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by 
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 
+-- Buffer keymaps
+vim.keymap.set('n', '<leader>bk', vim.cmd.bp, { desc = 'Go to previous buffer' })
+vim.keymap.set('n', '<leader>bj', vim.cmd.bn, { desc = 'Go to next buffer' })
+vim.keymap.set('n', '<leader>bd', vim.cmd.bd, { desc = 'Remove current buffer' })
 
 --  This function gets run when an LSP connects to a particular buffer.
 LSP_on_attach = function(_, bufnr)
