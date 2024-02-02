@@ -8,7 +8,7 @@ vim.g.maplocalleader = ' '
 if os.getenv("TERM") ~= "linux" then
   Theme = 'catppuccin'
 else
-  Theme = 'auto'
+  Theme = 'koehler'
 end
 
 -- [[ Install `lazy.nvim` plugin manager ]]
