@@ -168,6 +168,7 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
   { 'onsails/lspkind.nvim' },
+  { 'uga-rosa/ccc.nvim' },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.

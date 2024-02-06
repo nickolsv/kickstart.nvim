@@ -18,6 +18,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 vim.keymap.set('n', '<leader>=', vim.lsp.buf.format, { desc = 'Format current buffer with LSP' })
 vim.keymap.set('n', '<leader>r', ':%s/<C-r><C-w>/', { desc = 'Global Replace Word' })
+vim.keymap.set('n', '<leader>C', ':CccPick<cr>', { desc = 'Color Picker' })
 vim.keymap.set('n', '<Esc><Esc>', vim.cmd.noh, { desc = 'Clear search highlights' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
