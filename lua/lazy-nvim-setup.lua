@@ -176,6 +176,20 @@ require('lazy').setup({
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
+  {
+    "mfussenegger/nvim-dap",
+    lazy = true,
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+    },
+    keys = {
+      { "<leader>i", function() require('dap').toggle_breakpoint() end },
+      { "<leader>j", function() require('dap').continue() end },
+    },
+    config = function()
+      require("dapui").setup()
+    end
+  },
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
