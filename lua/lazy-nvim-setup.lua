@@ -183,8 +183,8 @@ require('lazy').setup({
       "rcarriga/nvim-dap-ui",
     },
     keys = {
-      { "<leader>i", function() require('dap').toggle_breakpoint() end },
-      { "<leader>j", function() require('dap').continue() end },
+      -- { "<leader>i", function() require('dap').toggle_breakpoint() end },
+      -- { "<leader>j", function() require('dap').continue() end },
     },
     config = function()
       require("dapui").setup()
