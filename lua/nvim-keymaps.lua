@@ -23,8 +23,6 @@ vim.keymap.set({ 'n', 'v' }, '<leader>f', vim.lsp.buf.format, { desc = 'Format c
 vim.keymap.set('n', '<leader>r', ':%s/<C-r><C-w>/', { desc = 'Global Replace Word' })
 vim.keymap.set('n', '<leader>C', ':CccPick<cr>', { desc = 'Color Picker' })
 vim.keymap.set('n', '<Esc><Esc>', vim.cmd.noh, { desc = 'Clear search highlights' })
-vim.keymap.set('n', '<C-u>', '<C-u>zz')
-vim.keymap.set('n', '<C-d>', '<C-d>zz')
 
 -- Neotree
 vim.keymap.set('n', '<leader>n', function() require('neo-tree.command').execute({ toggle = true }) end, { desc = "Toggle Neotree" })
