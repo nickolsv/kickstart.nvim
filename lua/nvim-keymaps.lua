@@ -24,6 +24,19 @@ vim.keymap.set('n', '<leader>r', ':%s/<C-r><C-w>/', { desc = 'Global Replace Wor
 vim.keymap.set('n', '<leader>C', ':CccPick<cr>', { desc = 'Color Picker' })
 vim.keymap.set('n', '<Esc><Esc>', vim.cmd.noh, { desc = 'Clear search highlights' })
 
+local function lazy(keys)
+  keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
+  return function()
+    local old = vim.o.lazyredraw
+    vim.o.lazyredraw = true
+    vim.api.nvim_feedkeys(keys, 'nx', false)
+    vim.o.lazyredraw = old
+  end
+end
+
+vim.keymap.set({ 'n', 'v', 'x' }, '<C-d>', lazy('<C-d>zz'))
+vim.keymap.set({ 'n', 'v', 'x' }, '<C-u>', lazy('<C-u>zz'))
+
 -- Neotree
 vim.keymap.set('n', '<leader>n', function() require('neo-tree.command').execute({ toggle = true }) end, { desc = "Toggle Neotree" })
 
